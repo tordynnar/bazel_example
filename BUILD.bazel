@@ -1,1 +1,14 @@
-# Root BUILD file
+load("@protobuf//bazel:proto_library.bzl", "proto_library")
+
+filegroup(
+    name = "proto_srcs",
+    srcs = glob(["proto/**/*.proto"]),
+    visibility = ["//python_package:__pkg__"],
+)
+
+proto_library(
+    name = "all_protos",
+    srcs = glob(["proto/**/*.proto"]),
+    strip_import_prefix = "/proto",
+    visibility = ["//python_package:__pkg__"],
+)
