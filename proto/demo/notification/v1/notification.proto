@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package demo.notification.v1;
+
+// NotificationService handles sending and subscribing to notifications.
+// Notifications are one-way messages with a severity level, delivered
+// either as a single send or as a real-time stream via subscription.
+service NotificationService {
+  // SendNotification dispatches a notification to a specific recipient.
+  // Returns the created notification with a server-assigned ID and timestamp.
+  rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
+
+  // Subscribe opens a server-side stream of notifications for a given user.
+  // Optionally filters by severity levels. The stream remains open until
+  // the client disconnects.
+  rpc Subscribe(SubscribeRequest) returns (stream Notification);
+}
+
+// Severity indicates the importance level of a notification.
+enum Severity {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_INFO = 1;
+  SEVERITY_WARNING = 2;
+  SEVERITY_ERROR = 3;
+  SEVERITY_CRITICAL = 4;
+}
+
+message Notification {
+  // Server-assigned unique identifier.
+  string id = 1;
+
+  // Short summary of the notification.
+  string title = 2;
+
+  // Full notification content.
+  string body = 3;
+
+  // Importance level of the notification.
+  Severity severity = 4;
+
+  // Timestamp when the notification was created (ISO 8601).
+  string timestamp = 5;
+}
+
+message SendNotificationRequest {
+  // Short summary of the notification.
+  string title = 1;
+
+  // Full notification content.
+  string body = 2;
+
+  // Importance level of the notification.
+  Severity severity = 3;
+
+  // The user ID to deliver the notification to.
+  string recipient_id = 4;
+}
+
+message SendNotificationResponse {
+  // The created notification.
+  Notification notification = 1;
+}
+
+message SubscribeRequest {
+  // The user ID to receive notifications for.
+  string user_id = 1;
+
+  // If non-empty, only notifications matching these severity levels are streamed.
+  // If empty, all notifications are included.
+  repeated Severity severity_filter = 2;
+}

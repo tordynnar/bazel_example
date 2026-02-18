@@ -1,0 +1,12 @@
+# Bazel
+/bazel-*
+MODULE.bazel.lock
+
+# Python
+.venv/
+.test_venv/
+__pycache__/
+*.pyc
+
+# Tools
+.ruff_cache/

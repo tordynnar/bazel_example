@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package demo.echo.v1;
+
+// EchoService provides simple echo functionality for testing connectivity
+// and round-trip latency of gRPC services.
+service EchoService {
+  // Echo returns the provided message back to the caller along with a
+  // server-side UTC timestamp.
+  rpc Echo(EchoRequest) returns (EchoResponse);
+
+  // EchoStream returns the provided message multiple times as a server-side
+  // stream. The number of responses is controlled by repeat_count.
+  rpc EchoStream(EchoStreamRequest) returns (stream EchoResponse);
+}
+
+message EchoRequest {
+  // The message to echo back.
+  string message = 1;
+}
+
+message EchoStreamRequest {
+  // The message to echo back in each response.
+  string message = 1;
+
+  // The number of times to repeat the message in the stream.
+  int32 repeat_count = 2;
+}
+
+message EchoResponse {
+  // The echoed message.
+  string message = 1;
+
+  // The UTC timestamp when the server processed the request (ISO 8601).
+  string timestamp = 2;
+}

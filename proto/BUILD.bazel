@@ -1,0 +1,17 @@
+load("@protobuf//bazel:proto_library.bzl", "proto_library")
+load(":defs.bzl", "proto_init_files")
+
+_PROTO_SRCS = glob(["**/*.proto"])
+
+proto_library(
+    name = "all_protos",
+    srcs = _PROTO_SRCS,
+    strip_import_prefix = "/proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_init_files(
+    name = "package_init",
+    proto_srcs = _PROTO_SRCS,
+    visibility = ["//visibility:public"],
+)

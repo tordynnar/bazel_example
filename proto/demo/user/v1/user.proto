@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package demo.user.v1;
+
+// UserService manages user accounts, supporting basic CRUD operations
+// and paginated listing.
+service UserService {
+  // GetUser retrieves a single user by their unique identifier.
+  // Returns NOT_FOUND if the user does not exist.
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+
+  // CreateUser registers a new user with the provided name and email.
+  // Returns the created user with a server-assigned ID and timestamp.
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+
+  // ListUsers returns a paginated list of all users.
+  // Use page_token from a previous response to fetch the next page.
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+}
+
+message User {
+  // Server-assigned unique identifier.
+  string id = 1;
+
+  // Display name of the user.
+  string name = 2;
+
+  // Email address of the user.
+  string email = 3;
+
+  // Timestamp when the user was created (ISO 8601).
+  string created_at = 4;
+}
+
+message GetUserRequest {
+  // The unique identifier of the user to retrieve.
+  string id = 1;
+}
+
+message GetUserResponse {
+  // The requested user.
+  User user = 1;
+}
+
+message CreateUserRequest {
+  // Display name for the new user.
+  string name = 1;
+
+  // Email address for the new user.
+  string email = 2;
+}
+
+message CreateUserResponse {
+  // The newly created user.
+  User user = 1;
+}
+
+message ListUsersRequest {
+  // Maximum number of users to return per page. Defaults to a server-defined limit.
+  int32 page_size = 1;
+
+  // Token from a previous ListUsersResponse to retrieve the next page.
+  // Omit or leave empty for the first page.
+  string page_token = 2;
+}
+
+message ListUsersResponse {
+  // The list of users for this page.
+  repeated User users = 1;
+
+  // Token to pass in the next ListUsersRequest to get the following page.
+  // Empty when there are no more results.
+  string next_page_token = 2;
+}
