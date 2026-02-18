@@ -8,5 +8,16 @@ MODULE.bazel.lock
 __pycache__/
 *.pyc
 
+# Go
+go_echo_server/server
+go_echo_client/client
+
+# Rust
+/target/
+
+# Generated proto sources (regenerate with: bash generate_protos.sh)
+go_package/demo/
+rust_package/src/lib.rs
+
 # Tools
 .ruff_cache/

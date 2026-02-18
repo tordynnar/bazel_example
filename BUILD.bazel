@@ -6,9 +6,35 @@ filegroup(
     visibility = ["//python_package:__pkg__"],
 )
 
+# Combined proto_library for the Python pipeline
 proto_library(
     name = "all_protos",
     srcs = glob(["proto/**/*.proto"]),
     strip_import_prefix = "/proto",
-    visibility = ["//python_package:__pkg__"],
+    visibility = [
+        "//python_package:__pkg__",
+        "//rust_package:__pkg__",
+    ],
+)
+
+# Per-service proto_library targets for Go, C++, Rust
+proto_library(
+    name = "echo_proto",
+    srcs = ["proto/demo/echo/v1/echo.proto"],
+    strip_import_prefix = "/proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "user_proto",
+    srcs = ["proto/demo/user/v1/user.proto"],
+    strip_import_prefix = "/proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "notification_proto",
+    srcs = ["proto/demo/notification/v1/notification.proto"],
+    strip_import_prefix = "/proto",
+    visibility = ["//visibility:public"],
 )

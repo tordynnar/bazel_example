@@ -1,0 +1,11 @@
+[package]
+name = "rust_echo_server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rust_package = { path = "../rust_package" }
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+tokio-stream = "0.1"
+tonic = "0.12"

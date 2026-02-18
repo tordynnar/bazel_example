@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "rust_package",
+    "rust_echo_server",
+    "rust_echo_client",
+]
+resolver = "2"

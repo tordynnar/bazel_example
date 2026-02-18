@@ -1,0 +1,27 @@
+load("@rules_rust_prost//:defs.bzl", "rust_prost_library")
+
+# Combined library for all proto services (used for source generation)
+rust_prost_library(
+    name = "all_rust_prost",
+    proto = "//:all_protos",
+    visibility = ["//visibility:public"],
+)
+
+# Per-service libraries (kept for reference / selective builds)
+rust_prost_library(
+    name = "echo_rust_prost",
+    proto = "//:echo_proto",
+    visibility = ["//visibility:public"],
+)
+
+rust_prost_library(
+    name = "user_rust_prost",
+    proto = "//:user_proto",
+    visibility = ["//visibility:public"],
+)
+
+rust_prost_library(
+    name = "notification_rust_prost",
+    proto = "//:notification_proto",
+    visibility = ["//visibility:public"],
+)

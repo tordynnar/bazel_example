@@ -1,4 +1,1 @@
 build --incompatible_default_to_explicit_init_py=true
-build --repo_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
-build --linkopt=-fuse-ld=lld
-build --host_linkopt=-fuse-ld=lld

@@ -1,0 +1,19 @@
+load("@rules_proto_grpc_cpp//:defs.bzl", "cpp_grpc_library")
+
+cpp_grpc_library(
+    name = "echo_cpp_grpc",
+    protos = ["//:echo_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cpp_grpc_library(
+    name = "user_cpp_grpc",
+    protos = ["//:user_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cpp_grpc_library(
+    name = "notification_cpp_grpc",
+    protos = ["//:notification_proto"],
+    visibility = ["//visibility:public"],
+)

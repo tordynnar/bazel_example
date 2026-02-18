@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package demo.notification.v1;
 
+option go_package = "github.com/bazel_test/go_package/demo/notification/v1;notificationv1";
+
 // NotificationService handles sending and subscribing to notifications.
 // Notifications are one-way messages with a severity level, delivered
 // either as a single send or as a real-time stream via subscription.

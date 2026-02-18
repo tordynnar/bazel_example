@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package demo.user.v1;
 
+option go_package = "github.com/bazel_test/go_package/demo/user/v1;userv1";
+
 // UserService manages user accounts, supporting basic CRUD operations
 // and paginated listing.
 service UserService {

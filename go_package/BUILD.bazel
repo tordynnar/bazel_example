@@ -1,0 +1,11 @@
+load("@rules_proto_grpc_go//:defs.bzl", "go_grpc_compile")
+
+go_grpc_compile(
+    name = "all_go_compile",
+    protos = [
+        "//:echo_proto",
+        "//:user_proto",
+        "//:notification_proto",
+    ],
+    visibility = ["//visibility:public"],
+)

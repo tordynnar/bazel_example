@@ -1,0 +1,7 @@
+cc_binary(
+    name = "cpp_echo_client",
+    srcs = ["main.cc"],
+    deps = [
+        "//cpp_package:echo_cpp_grpc",
+    ],
+)

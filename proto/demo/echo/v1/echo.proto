@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package demo.echo.v1;
 
+option go_package = "github.com/bazel_test/go_package/demo/echo/v1;echov1";
+
 // EchoService provides simple echo functionality for testing connectivity
 // and round-trip latency of gRPC services.
 service EchoService {
